@@ -1,0 +1,41 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.lanou.domain.Student"
+           table="student">
+        <id name="sid">
+            <generator class="native"/>
+        </id>
+
+        <!--普通属性-->
+        <property name="sname"/>
+        <property name="spassword"/>
+
+        <!--
+        对于一对多的关系，在多的一方配置，由多的一方维护二者
+        之间的关系
+        一个班级对应多个学生，clazz是1；student是n；
+
+        一对多单向：学生对象能找到所在班级信息
+
+
+        -->
+
+        <!--
+        many-to-one：在一对多的关系中，在多的一方配置的关系
+            指向
+            name：多这一方包含的一这方的对象属性名称
+            class：1这一方的类路径
+            cascade：级联关系，即操作student会不会影响到clazz，
+                     参数值代表哪些操作会影响.
+        -->
+        <many-to-one name="clazz"
+                     class="com.lanou.domain.Clazz"
+                     cascade="all">
+        </many-to-one>
+
+
+    </class>
+
+</hibernate-mapping>
